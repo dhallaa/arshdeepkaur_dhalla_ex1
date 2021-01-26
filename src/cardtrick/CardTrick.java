@@ -5,6 +5,8 @@
  */
 package cardtrick;
 
+import java.util.Scanner;
+
 
 /**
  * A class that fills a hand of 7 cards with random Card Objects and then asks the user to pick a card.
@@ -13,6 +15,7 @@ package cardtrick;
  *
  * @author dancye
  * @author Paul Bonenfant Jan 2021
+ * @author Arshdeep kaur dhalla jan 26 2021
  **/
 public class CardTrick {
 
@@ -24,16 +27,56 @@ public class CardTrick {
        Card[] hand = new Card[7];
         for (int i = 0; i < hand.length; i++) {
             Card card = new Card();
-            //card.setValue(insert call to random number generator here)
-            //card.setSuit(Card.SUITS[insert call to random number between 0-3 here])
+            //generate random number between 0 to13
+            int randomValue=(int)((Math.random()*13)+1);
+            // random number between 0-3 here])
+             int randomSuit=(int)((Math.random()*3)+1);
+             card.setValue(i);
+             card.setSuit(Card.SUITS[randomSuit]);
+             
+             hand[i]=card;
         }
 
         // insert code to ask the user for Card value and suit, create their card
         // and search the hand here.
         // If the guess is successful, invoke the printInfo() method below
+        int cardValue;
+        int cardSuit;
         
+        Scanner input=new Scanner(System.in);
+        do{
+            
+            System.out.println("Enter any number from 1to 13=");
+            cardValue=input.nextInt();
+          }
+        while(cardValue>13 || cardValue<1);
+        
+        do{
+            
+           System.out.println("Enter any number from  0to 3="
+                   +"0=Hearts\n"
+                   +"1=Diamonds\n"
+                   +"2=spades\n"
+                   +"3=clubs\n"); 
+           cardSuit=input.nextInt();
+          }
+        while(cardSuit<0 || cardSuit>3);
     }
 
+     // Create the card for camparison.
+         Card usercard= new Card();
+
+
+         usercard.setValue(cardValue);
+         usercard.setSuit(Card.SUITS[cardSuit]);
+         
+         for(int i=0; i<hand.length;i++);
+         {
+         if(usercard.getSuit()==hand[i].getSuit()&&usercard.getValue() == hand[i].getvalue()){
+         printInfo();
+         }
+         }
+    
     /**
      * A simple method to print out personal information. Follow the instructions to 
      * replace this information with your own.
